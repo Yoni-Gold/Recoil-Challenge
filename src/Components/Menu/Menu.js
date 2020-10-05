@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import recoil from 'recoil';
+import { rectanglesArrayState , rectAtomFamily } from '../atom';
 import "./menu.css";
 
 function Menu() {
@@ -6,10 +8,16 @@ function Menu() {
 	const [widthInput, setWidthInput] = useState(75);
 	const [heightInput, setHeightInput] = useState(75);
 	const [colorInput, setColorInput] = useState("#769fcd");
+	const [counter , setCounter] = useState(0);
+	const setArray = recoil.useSetRecoilState(rectanglesArrayState);
+	const [rectAtom, setFamily] = recoil.useRecoilState(rectAtomFamily(counter));
 
-	const submitShape = () => {};
+	// const submitShape = () => {setArray((oldArray) => [...oldArray , {widthInput , heightInput , colorInput}])};
+	const submitShape = () => {setArray((oldArray) => [...oldArray , counter]); setFamily({widthInput , heightInput , colorInput})};
+
 	return (
 		<div className="sidebar__menu">
+			<div id="idCounter">Shape Counter: {counter}</div>
 			<label htmlFor="widthInput">Width:</label>
 			<input
 				id="widthInput"
@@ -35,7 +43,7 @@ function Menu() {
 				value={colorInput}
 				onChange={({ target }) => setColorInput(target.value)}
 			/>
-			<button onClick={submitShape} id="add-shape">
+			<button onClick={() => {setCounter((counter) => ++counter); submitShape()}} id="add-shape">
 				Add Shape
 			</button>
 		</div>

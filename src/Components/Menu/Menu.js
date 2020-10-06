@@ -17,7 +17,6 @@ function Menu() {
 
 	return (
 		<div className="sidebar__menu">
-			<div id="idCounter">Shape Counter: {counter}</div>
 			<label htmlFor="widthInput">Width:</label>
 			<input
 				id="widthInput"
@@ -46,6 +45,7 @@ function Menu() {
 			<button onClick={() => {setCounter((counter) => ++counter); submitShape()}} id="add-shape">
 				Add Shape
 			</button>
+			<div id="idCounter">Shape Counter: {counter}</div>
 		</div>
 	);
 }

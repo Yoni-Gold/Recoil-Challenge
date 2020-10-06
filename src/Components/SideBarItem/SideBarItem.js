@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState , useEffect} from "react";
 import "./sideBarItem.css";
 import recoil from 'recoil';
 import { rectanglesArrayState  , rectAtomFamily } from '../atom';
@@ -16,15 +16,17 @@ function SideBarItem({num}) {
 
 	const change = () => {setFamily({widthInput , heightInput , colorInput})};
 
+	useEffect(change, [widthInput, heightInput, colorInput]);
+
 	return (
 		<li className="sidebar__row">
 			<span className="sidebarItemName">{num}</span>
 			<label>width :</label>
-			<input id="shapeWidthInput" type="number" value={widthInput} placeholder={rectangle.widthInput} min="0" onChange={({ target }) => {setWidthInput(target.value); change()}} />
+			<input id="shapeWidthInput" type="number" value={widthInput} placeholder={rectangle.widthInput} min="0" onChange={({ target }) => {setWidthInput(target.value);}} />
 			<label>height :</label>
-			<input id="shapeHeightInput" type="number" value={heightInput} placeholder={rectangle.heightInput} min="0" onChange={({ target }) => {setHeightInput(target.value); change()}}/>
+			<input id="shapeHeightInput" type="number" value={heightInput} placeholder={rectangle.heightInput} min="0" onChange={({ target }) => {setHeightInput(target.value);}}/>
 			<label>color :</label>
-			<input type="color" id="colorModifier" value={colorInput} onChange={({ target }) => {setColorInput(target.value); change()}}/>
+			<input type="color" id="colorModifier" value={colorInput} onChange={({ target }) => {setColorInput(target.value);}}/>
 		</li>
 	);
 }
